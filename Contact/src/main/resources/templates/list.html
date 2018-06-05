@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+   <table class="tg">
+	<tr>
+		<th width="80">Person ID</th>
+		<th width="120">Person Name</th>
+		<th width="60">View</th>
+		<th width="60">Edit</th>
+		<th width="60">Delete</th>
+	</tr>
+	<c:forEach items="${listeContacts}" var="e">
+		<tr>
+			<td>${e.id}</td>
+			<td>${e.nom}</td>
+			<td><a href="<c:url value='/view/${e.id}' />" >View</a></td>
+			<td><a href="<c:url value='/edit/${e.id}' />" >Edit</a></td>
+			<td><a href="<c:url value='/remove/${e.id}' />" >Delete</a></td>
+		</tr>
+	</c:forEach>
+	</table>
+	
+    <p>Ajouter un contact <a href="/add">here</a></p>
+    <p>Retour <a href="/">here</a></p>
+    
+    
+</body>
+</html>
