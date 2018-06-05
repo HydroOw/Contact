@@ -99,6 +99,21 @@ public class WebController implements WebMvcConfigurer {
         model.addAttribute("contact",c);
         return "view";
     }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editContact(@PathVariable(required = true, name = "id") Long id, Model model, @Valid Contact personForm, BindingResult bindingResult){
+		
+        Contact c = repository.findOne(id);
+        model.addAttribute("contact",c);
+        
+        if (bindingResult.hasErrors()) {
+            return "editContact";
+        }
+        
+        repository.save(c);
+        
+        return "view";
+    }
    
 
 	@Override
