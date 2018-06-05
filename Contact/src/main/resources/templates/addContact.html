@@ -4,8 +4,9 @@
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
-        <form action="#" th:action="@{/}" th:object="${contact}" method="post">
+        <form action="#" th:action="@{/add}" th:object="${contact}" method="post">
             <table>
+            <input type="hidden" th:field="*{id}"/>
                 <tr>
                     <td>Nom:</td>
                     <td><input type="text" th:field="*{nom}" /></td>
@@ -23,12 +24,12 @@
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="text" th:field="*{email}" /></td>
+                    <td><input type="email" th:field="*{email}" /></td>
                     <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
                 </tr>
                 <tr>
                     <td>Téléphone:</td>
-                    <td><input type="text" th:field="*{telephone}" /></td>
+                    <td><input type="tel" th:field="*{telephone}" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" /></td>
                     <td th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Telephone Error</td>
                 </tr>
                 <tr>

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -48,8 +50,20 @@ public class WebController implements WebMvcConfigurer {
     }
 
     @GetMapping("/add")
-    public String showForm(Contact personForm) {
+    public String showForm(Model model) {
+    	model.addAttribute("contact", new Contact());
         return "addContact";
+    }
+    
+    @PostMapping("/add")
+    public String saveContact(@Valid Contact personForm, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "addContact";
+        }
+        
+        repository.save(personForm);
+        return "redirect:/list";
     }
 
     @GetMapping("/list")
@@ -62,28 +76,13 @@ public class WebController implements WebMvcConfigurer {
     	return repository.findAll();
     }
     
-    @GetMapping("/edit")
-    public String editContact() {
-        return "editContact";
-    }
-
     
     @GetMapping("/")
     public String showIndex() {
         return "index";
     }
 
-    @PostMapping("/")
-    public String checkPersonInfo(@Valid Contact personForm, BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            return "addContact";
-        }
-        
-        repository.save(personForm);
-
-        return "redirect:/";
-    }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String removeContact(@PathVariable(required = true, name = "id") Long id){
@@ -100,21 +99,13 @@ public class WebController implements WebMvcConfigurer {
         return "view";
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/edit/{id}")
     public String editContact(@PathVariable(required = true, name = "id") Long id, Model model, @Valid Contact personForm, BindingResult bindingResult){
-		
         Contact c = repository.findOne(id);
         model.addAttribute("contact",c);
-        
-        if (bindingResult.hasErrors()) {
-            return "editContact";
-        }
-        
-        repository.save(c);
-        
-        return "view";
+               
+        return "addContact";
     }
-   
 
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {

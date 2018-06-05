@@ -48,6 +48,11 @@ public class Contact {
 		return id;
 	}
 	
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -91,7 +96,7 @@ public class Contact {
 	@Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, prenom='%s', nom='%s', age='%d', email='%s', telephone='%s']",
+                "Contact[id=%d, prenom='%s', nom='%s', age='%d', email='%s', telephone='%s']",
                 id, prenom, nom, age, email, telephone);
     }
 }
