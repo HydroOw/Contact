@@ -18,9 +18,9 @@
 		<tr>
 			<td th:text="${e.getId()}"></td>
 			<td th:text="${e.getNom()}"></td>
-			<td><a href="/view" th:href="@{/view/__${e.getId()}__}">View</a></td>
-			<td><a href="/edit" th:href="@{/edit/__${e.getId()}__}">Edit</a></td>
-			<td><a href="/delete" th:href="@{/delete/__${e.getId()}__}">Delete</a></td>
+			<td><a href="/view?id=${e.getId()}">View</a></td>
+			<td><a href="/edit/${e.getId()}">Edit</a></td>
+			<td><a href="/delete/${e.getId()}">Delete</a></td>
 		</tr>
 	</tr>
 	</table>

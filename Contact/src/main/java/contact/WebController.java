@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -83,19 +85,21 @@ public class WebController implements WebMvcConfigurer {
         return "redirect:/";
     }
     
-    
-    @RequestMapping("/remove/{id}")
-    public String removeContact(@PathVariable("id") long id){
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String removeContact(@PathVariable(required = true, name = "id") Long id){
 		
         repository.delete(id);
-        return "redirect:/persons";
+        return "redirect:/list";
     }
- 
-    @RequestMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") long id, Contact contact){
-        model.addAttribute("person", repository.findOne(id));
-        return "list";
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String viewContact(@PathVariable(required = true, name = "id") Long id, Model model){
+		
+        Contact c = repository.findOne(id);
+        model.addAttribute("contact",c);
+        return "view";
     }
+   
 
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {

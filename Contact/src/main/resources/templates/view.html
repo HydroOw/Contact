@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>Getting Started: Serving Web Content</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+            <table>
+                <tr>
+                    <td>Nom:</td>
+                    <td th:text="${contact.getNom()}"></td>
+                </tr>
+                <tr>
+                    <td>Prénom:</td>
+                    <td th:text="${contact.getPrenom()}"></td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td th:text="${contact.getAge()}"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td th:text="${contact.getEmail()}"></td>
+                </tr>
+                <tr>
+                    <td>Téléphone:</td>
+                    <td th:text="${contact.getTelephone()}"></td>
+                </tr>
+            </table>
+    <p><a href="/">Accueil</a></p>
+     <p><a href="/list">Retour à la liste</a></p>
+    </body>
+</html>
