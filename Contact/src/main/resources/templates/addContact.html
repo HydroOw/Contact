@@ -2,41 +2,52 @@
 	<head>
 		<title>Getting Started: Serving Web Content</title>
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>    
     </head>
     <body>
+        <center>
+    	<h1> Formulaire de contact </h1>
+    	</center>
+    	
+    	<div class="row">
+    <div class="offset-md-3 col-md-6">
         <form action="#" th:action="@{/add}" th:object="${contact}" method="post">
             <table>
             <input type="hidden" th:field="*{id}"/>
                 <tr>
                     <td>Nom:</td>
-                    <td><input type="text" th:field="*{nom}" /></td>
+                    <td><input type="text" th:field="*{nom}" class="form-control" /></td>
                     <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Name Error</td>
                 </tr>
                 <tr>
                     <td>Prénom:</td>
-                    <td><input type="text" th:field="*{prenom}" /></td>
+                    <td><input type="text" th:field="*{prenom}" class="form-control" /></td>
                     <td th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}">LastName Error</td>
                 </tr>
                 <tr>
                     <td>Age:</td>
-                    <td><input type="text" th:field="*{age}" /></td>
+                    <td><input type="text" th:field="*{age}" class="form-control" /></td>
                     <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="email" th:field="*{email}" /></td>
+                    <td><input type="email" th:field="*{email}" class="form-control" /></td>
                     <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
                 </tr>
                 <tr>
                     <td>Téléphone:</td>
-                    <td><input type="tel" th:field="*{telephone}" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" /></td>
+                    <td><input type="tel" th:field="*{telephone}" class="form-control" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" /></td>
                     <td th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Telephone Error</td>
                 </tr>
                 <tr>
-                    <td><button type="submit">Submit</button></td>
+                    <td><button type="submit" class="form-control">Submit</button></td>
                 </tr>
             </table>
         </form>
-    <p>Retour <a href="/">here</a></p>
+        </div>
+        </div>
+        <center>
+        <a href="/" class="btn btn-primary" role="button">Accueil</a>
+        </center>
     </body>
 </html>
